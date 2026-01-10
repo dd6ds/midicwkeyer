@@ -1,0 +1,9 @@
+[package]
+name = "midicwkeyer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+midir = "0.10"
+cpal = "0.15"
+anyhow = "1.0"
