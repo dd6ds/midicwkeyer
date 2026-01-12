@@ -1,5 +1,14 @@
 # MIDI CW Keyer - Rust Implementation
 
+Adruino
+
+https://raw.githubusercontent.com/digistump/arduino-boards-index/master/package_digistump_index.json
+
+ino
+
+cd ~/Arduino/libraries/
+git clone https://github.com/heartscrytech/DigisparkMIDI
+
 A Morse code keyer with MIDI input and audio output, converted from Python to Rust.
 
 ## Original Project
