@@ -28,15 +28,15 @@ void setup() {
   // LED blinkt 3x zur Bestätigung
   for (int i = 0; i < 3; i++) {
     digitalWrite(LED, HIGH);
-    delay(100);
+    DigiMIDI.delay(100);
     digitalWrite(LED, LOW);
-    delay(100);
+    DigiMIDI.delay(100);
   }
 }
 
 void loop() {
-  // ✅ WICHTIG: MIDI refresh() regelmäßig aufrufen!
-  DigiMIDI.refresh();
+  // ✅ WICHTIG: MIDI update() regelmäßig aufrufen! (NICHT refresh()!)
+  DigiMIDI.update();
   
   // Paddle abfragen
   paddleDitState = !digitalRead(paddleDit);
@@ -50,7 +50,7 @@ void loop() {
   }
   else if (!paddleDitState && lastDitState) {
     // MIDI Note Off senden
-    DigiMIDI.sendNoteOff(MIDI_NOTE_DIT, MIDI_CHANNEL);
+    DigiMIDI.sendNoteOff(MIDI_NOTE_DIT, MIDI_VELOCITY, MIDI_CHANNEL);
     digitalWrite(LED, LOW);
   }
   
@@ -60,13 +60,14 @@ void loop() {
     digitalWrite(LED, HIGH);
   }
   else if (!paddleDahState && lastDahState) {
-    DigiMIDI.sendNoteOff(MIDI_NOTE_DAH, MIDI_CHANNEL);
+    DigiMIDI.sendNoteOff(MIDI_NOTE_DAH, MIDI_VELOCITY, MIDI_CHANNEL);
     digitalWrite(LED, LOW);
   }
   
   lastDitState = paddleDitState;
   lastDahState = paddleDahState;
   
-  // ✅ WICHTIG: Kurze Delay, nicht zu lange!
-  delay(1);  // 1ms ist OK, nicht mehr!
+  // ✅ WICHTIG: DigiMIDI.delay() verwenden für V-USB!
+  DigiMIDI.delay(1);  // 1ms ist OK
 }
+
